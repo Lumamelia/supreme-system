@@ -1,3 +1,4 @@
+
 const proxyUrl = "https://proxy-openai-assistants-itnd0tnf0.vercel.app/api";
 
 async function sendToAssistant(assistantId) {
