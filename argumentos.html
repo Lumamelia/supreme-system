@@ -27,7 +27,7 @@ document.getElementById("askButton").addEventListener("click", async function() 
   resposta.innerText = "Pensando...";
 
   try {
-    const res = await fetch("https://proxy-openai-assistants-itnd0tnf0.vercel.app/api", {
+    const res = await fetch("https://proxy-openai-assistants-gxrp.vercel.app/api", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userInput: pergunta, assistantId })
