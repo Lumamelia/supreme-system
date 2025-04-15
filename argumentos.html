@@ -14,10 +14,33 @@
     </nav>
   </header>
   <main>
-    <input type="text" id="userInput" placeholder="Digite sua pergunta">
-    <button onclick="sendToAssistant('asst_jibqdS7XdboVKfUsxqkPusnm')">Perguntar</button>
-    <div id="response"></div>
-  </main>
-  <script src="js/script.js"></script>
+  <input type="text" id="userInput" placeholder="Digite sua pergunta" style="width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;">
+<button id="askButton" style="width: 100%; padding: 15px; background-color: #7a0420; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">Perguntar</button>
+<div id="response" style="margin-top: 20px; padding: 15px; border-radius: 8px; background: #f9f9f9; border: 1px solid #eee; font-size: 16px; min-height: 50px;"></div>
+
+<script>
+document.getElementById("askButton").addEventListener("click", async function() {
+  const pergunta = document.getElementById("userInput").value;
+  const resposta = document.getElementById("response");
+  const assistantId = "asst_jibqdS7XdboVKfUsxqkPusnm"; // argumentos
+
+  resposta.innerText = "Pensando...";
+
+  try {
+    const res = await fetch("https://proxy-openai-assistants-itnd0tnf0.vercel.app/api", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userInput: pergunta, assistantId })
+    });
+
+    const data = await res.json();
+    resposta.innerText = data.message || "Erro ao responder.";
+
+  } catch (e) {
+    resposta.innerText = "Erro de conexão.";
+  }
+});
+</script>
+
 </body>
 </html>
